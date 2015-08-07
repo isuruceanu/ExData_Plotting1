@@ -11,24 +11,39 @@ plot4 <- function() {
     unzipfile(file.zip, file.data)
     
     data <- loaddata(file.data)
-    
+    par(mar = c(4, 4, 2, 4))
     par(mfrow=c(2,2))
+    
+    
+    llbls<-c('Sub_metering_1','Sub_metering_2','Sub_metering_3')
+    lncol<-c('black','red','blue')
     
     with(data, {
         
         plot(Global_active_power ~ dt, type = "l", 
-             ylab = "Global Active Power (killowatts)",
+             ylab = "Global Active Power",
              xlab = "")
-        plot(Voltage~dt, type = "l", ylab = "Voltage", xlab = "")
+        plot(Voltage~dt, type = "l", ylab = "Voltage", xlab = "datetime")
         
         plot(Sub_metering_1~dt, type = "l",
              ylab = "Energy sub metering",
              xlab = "")
         lines(Sub_metering_2~dt, col = "Red")
         lines(Sub_metering_3~dt, col = "Blue")
-        plot(Global_reactive_power~dt, xlab = "")
+        #I do not way but the legend is drawen in wrong positions and strange params
+        #tryed to reset par but no luck.
+        legend("topright", col=lncol, lty = "solid", cex=1.0, legend=llbls, bty='n')
+        plot(Global_reactive_power~dt, xlab = "datetime", type = "l")
     })
     
     dev.copy(png, "plot4.png", width = 480, height = 480)
     dev.off()
+}
+
+#function to reset par params
+resetPar <- function() {
+    dev.new()
+    op <- par(no.readonly = T)
+    dev.off()
+    op
 }
