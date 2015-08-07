@@ -11,7 +11,7 @@ plot3 <- function(){
     
     data <- loaddata(file.data)
     
-    par(mar = c(2, 2, 2, 2))
+    par(mar = c(2, 4, 2, 2))
     par(mfrow = c(1,1))
     
     plot(data$dt,data$Sub_metering_1, type = "l",
