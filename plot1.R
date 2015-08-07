@@ -38,12 +38,8 @@ unzipfile <- function(file.zip, file.data) {
     {
         message(paste("Unziping", file.zip, "to", file.data, "..."))
         unzip(file.zip, files = c(file.data))
-        
     }
 }
-
-
-
 
 ### load specific data from file.zipname
 loaddata <- function(file.name) {
@@ -70,5 +66,4 @@ loaddata <- function(file.name) {
     data$Sub_metering_3 <- as.numeric(data$Sub_metering_3)
     remove(DT) #clear the memory
     data
-    
 }

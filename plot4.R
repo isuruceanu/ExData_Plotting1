@@ -24,11 +24,11 @@ plot4 <- function() {
         plot(Sub_metering_1~dt, type = "l",
              ylab = "Energy sub metering",
              xlab = "")
-        lines(Sub_metering_2~dt, col = "Red")
-        lines(Sub_metering_3~dt, col = "Blue")
+        lines(Sub_metering_2~dt, col = "red")
+        lines(Sub_metering_3~dt, col = "blue")
+        
         #only with recordGraphics was able to draw a nice legend
         # see. : https://class.coursera.org/exdata-031/forum/thread?thread_id=58
-        
         recordGraphics(legend('topright'
                               ,c("Sub_metering_1","Sub_metering_2","Sub_metering_3")
                               , lty=1, bty="n"

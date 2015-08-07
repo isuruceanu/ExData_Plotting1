@@ -22,7 +22,6 @@ plot3 <- function(){
      
     #only with recordGraphics was able to draw a nice legend
     # see. : https://class.coursera.org/exdata-031/forum/thread?thread_id=58
-    
     recordGraphics(legend('topright',c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), 
                           lty=1, 
                           col=c('black', 'red', 'blue'),cex=0.8),list(), 
