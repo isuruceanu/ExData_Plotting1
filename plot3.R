@@ -11,22 +11,22 @@ plot3 <- function(){
     
     data <- loaddata(file.data)
     
-    
-    llbls<-c('Sub_metering_1','Sub_metering_2','Sub_metering_3')
-    lncol<-c('black','red','blue')
-    
     par(mar = c(2, 2, 2, 2))
     par(mfrow = c(1,1))
     
     plot(data$dt,data$Sub_metering_1, type = "l",
-                    ylab = "Energy sub metering", col=lncol[1], xlab = "")
-    lines(data$dt,data$Sub_metering_2, col = lncol[2])
+                    ylab = "Energy sub metering", col="black", xlab = "")
+    lines(data$dt,data$Sub_metering_2, col = "red")
     
-    lines(data$dt,data$Sub_metering_3, col = lncol[3])
+    lines(data$dt,data$Sub_metering_3, col = "blue")
      
-    #I do not way but the legend is drawen in wrong positions and strange params
-    #tryed to reset par but no luck.
-    legend("topright",col=lncol, lty = "solid", legend=llbls)
+    #only with recordGraphics was able to draw a nice legend
+    # see. : https://class.coursera.org/exdata-031/forum/thread?thread_id=58
+    
+    recordGraphics(legend('topright',c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), 
+                          lty=1, 
+                          col=c('black', 'red', 'blue'),cex=0.8),list(), 
+                            getNamespace("graphics"))
     
     dev.copy(png, "plot3.png", width = 480, height = 480)
     dev.off()

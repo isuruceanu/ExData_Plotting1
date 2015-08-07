@@ -14,10 +14,6 @@ plot4 <- function() {
     par(mar = c(4, 4, 2, 4))
     par(mfrow=c(2,2))
     
-    
-    llbls<-c('Sub_metering_1','Sub_metering_2','Sub_metering_3')
-    lncol<-c('black','red','blue')
-    
     with(data, {
         
         plot(Global_active_power ~ dt, type = "l", 
@@ -30,20 +26,19 @@ plot4 <- function() {
              xlab = "")
         lines(Sub_metering_2~dt, col = "Red")
         lines(Sub_metering_3~dt, col = "Blue")
-        #I do not way but the legend is drawen in wrong positions and strange params
-        #tryed to reset par but no luck.
-        legend("topright", col=lncol, lty = "solid", cex=1.0, legend=llbls, bty='n')
+        #only with recordGraphics was able to draw a nice legend
+        # see. : https://class.coursera.org/exdata-031/forum/thread?thread_id=58
+        
+        recordGraphics(legend('topright'
+                              ,c("Sub_metering_1","Sub_metering_2","Sub_metering_3")
+                              , lty=1, bty="n"
+                              , col=c('black', 'red', 'blue'),cex=0.8)
+                        ,list()
+                        , getNamespace("graphics")
+                       )
         plot(Global_reactive_power~dt, xlab = "datetime", type = "l")
     })
     
     dev.copy(png, "plot4.png", width = 480, height = 480)
     dev.off()
-}
-
-#function to reset par params
-resetPar <- function() {
-    dev.new()
-    op <- par(no.readonly = T)
-    dev.off()
-    op
 }
